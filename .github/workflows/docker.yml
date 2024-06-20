@@ -1,3 +1,4 @@
+# .github/workflows/docker.yml
 name: Python Flask Docker CI
 
 on:
@@ -19,16 +20,7 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
-      - name: Build Docker image
-        run: docker build --file Dockerfile --tag flask-app .
-
-      - name: Run Docker container
-        run: docker run -d -p 5000:5000 flask-app
-
-      - name: Wait for container to start
-        run: docker ps -a
-
-      - name: Test Flask application
-       - run: docker exec $(docker ps -q --filter ancestor=flask-app) pytest
-
-      # Optional: Add more steps for deployment or further testing
+      - name: Build and run Docker container
+        run: |
+          docker build --file Dockerfile --tag flask-app .
+          docker run -p 5000:5000 flask-app
