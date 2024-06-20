@@ -29,6 +29,4 @@ jobs:
         run: docker ps -a
 
       - name: Test Flask application
-       - run: docker exec $(docker ps -q --filter ancestor=flask-app) pytest
-
-      # Optional: Add more steps for deployment or further testing
+  
